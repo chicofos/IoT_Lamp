@@ -1,21 +1,28 @@
-var socketio = require('socket.io');
+var socketio = require("socket.io");
+var five = require("johnny-five");
 
 module.exports = function(server) {
 
+  var board = new five.Board();
   var io = socketio(server);
 
-  io.on('connection', function(socket){
-    console.log('Connected!');
+  board.on("ready", function(){
 
-    socket.on('Hello', function(msg){
-      console.log('Saying Hello');
-    })
+    var led = new five.Led({ pin: 11 });
+    //always starts in OFF mode
+    led.off();
 
-    socket.emit('message', "Hello there")
+    io.on('connection', function(socket){
+      
+      console.log('Connected');
+      socket.emit('changeStatus', "ON");
 
-    socket.on('changeStatus', function(status){
-      console.log(status);
-    })
+      socket.on('changeStatus', function(status){
+        status == "ON" ? led.fadeIn() : led.fadeOut();
+      });
+
+    });
+    
   });
 
 };
