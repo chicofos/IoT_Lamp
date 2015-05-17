@@ -15,7 +15,7 @@ module.exports = function(server) {
     io.on('connection', function(socket){
       
       console.log('Connected');
-      socket.emit('changeStatus', "ON");
+      socket.emit('changeStatus', "OFF");
 
       socket.on('changeStatus', function(status){
         status == "ON" ? led.fadeIn() : led.fadeOut();
