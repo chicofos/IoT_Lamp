@@ -63,15 +63,22 @@ hr.star-light {
 
 
 .banner {
-
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);  /* For Webkit browsers */
+    filter: gray;  /* For IE 6 - 9 */
+    -webkit-transition: all .6s ease;  /* Transition for Webkit browsers */
   display: block;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   height: 300px;
+
 }
 
 .addGray{
-    -webkit-filter: grayscale(100%); filter: grayscale(100%);
+     filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);  /* For Webkit browsers */
+    filter: gray;  /* For IE 6 - 9 */
+    -webkit-transition: all .6s ease;  /* Transition for Webkit browsers */
 }
 
 hr.star-light:after {
